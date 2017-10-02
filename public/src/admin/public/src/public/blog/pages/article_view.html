@@ -1,0 +1,118 @@
+	 <div ng-include="'pages/header.html'"></div>
+	 <div class=" primary_image" >
+	   <img ng-if="getBlog.imageUrl!=''" class="centered-and-cropped" style="height: 400px;" ng-src="{{getBlog.imageUrl}}">
+	    <img ng-if="getBlog.imageUrl==''" class="centered-and-cropped" style="height: 400px;" src="http://english.tw/wp-content/themes/qaengine/img/default-thumbnail.jpg">
+	 </div>
+	 <div class="clearfix"></div>
+	
+	<div class="col-sm-12">
+		  <div class="col-sm-8 border_right">
+			   <div class="col-sm-12">
+			        <h1><b><p style="font-family:sans-serif;font-weight: 800;">{{getBlog.title}}</p></b></h1>	  
+			   </div>
+
+			   <div class="col-sm-11">
+			   <p>By <span  class="text-capitalize" style="color:#0077b5;font-size:13px;font-family: Georgia;font-weight:bold">{{getBlog.author}}</span> | {{getBlog.updated_at | date}}</p>
+			   <hr  align="center"> 
+			   </div>
+
+		     <div class="clearfix"></div>
+		  
+		    <div class="col-sm-10 col-sm-offset-1" style="min-height: 200px">
+		 	    <div> <p class="" ng-bind-html='toTrustedHTML( getBlog.body )'></div>
+			 </div>
+				<div class="col-sm-12" style="margin-top:15px">
+						<button class="upvote-btn" ng-hide="upvote" ng-click="upvoteFunc()">Upvote | {{getBlog.upvotes}}</button>
+						<button class="upvote-btn upvote_button_active"  ng-show="upvote" ng-click="upvoteFunc()">Upvoted | {{getBlog.upvotes}}</button>
+						<hr>
+				</div>
+				<div class="col-sm-12">
+					<form class="form-horizontal">
+						<div class="form-group" >
+							<label style="font-size:16px" class="control-label col-sm-2">Comments:</label>
+							<div class="col-sm-8 textarea" >
+								<textarea rows="1" style="min-height: 34px;" autogrow ng-model="comment" class="form-control" placeholder="Add a comment..."></textarea>
+							</div>
+							<div class="col-sm-2">
+								<button type="submit" class="comment-btn"   ng-click="commentFunc()">Comment</button>
+							</div>
+						</div>
+					</form>
+					<!--<div class="col-sm-2">
+						<h4><b><u>Comments</u></b></h4>
+					</div>
+					<div class="col-sm-7">
+						<textarea rows="1" ng-model="comment" class="form-control" placeholder="Add a comment..."></textarea>
+					</div>
+					<div class="col-sm-2">
+							<button type="submit" class="comment-btn"   ng-click="commentFunc()">Comment</button>
+					</div>-->
+						
+					<!--<hr style="margin-top:55px">-->
+				</div>
+				<div class="clearfix"></div>
+				<div class="container_comments"  style=" margin-top: 20px;">
+					<div class="col-sm-12" style=" background-color: #f6f6f6 !important;" ng-repeat="k in getBlog.comments">
+						<div class="col-sm-2" style="margin-top:10px">
+							<img src="imgs/noavatar.png" style="transform:scale(0.7);margin-top:-8px;margin-left: -25px">
+						</div>
+						<div class="col-sm-9" style="margin-left:-20px;margin-top:10px">
+							<p><span class="text-capitalize" style="color:#0077b5;font-size:13px;font-family: Georgia;font-weight:bold">{{k.person}}</span>  |
+							 <span style="font-size:13px"> {{k.created_at | date:"d-MMM-yy h:mm a" }} </span>| 
+							<span style="font-weight: 400; color: #999;font-family: Helvetica Neue,Helvetica,Arial,sans-serif;">{{k.upvotes}} upvotes</span>
+							<a href="" ng-hide="editComment" ng-click="editComment=!editcomment;editComment=true;showcancel=true;"><span class="pull-right color-blue" ng-if="k.userId==userId">Edit &nbsp;</span></a>
+							<a href="" ng-click="editComment=false;showcancel=false;"><span ng-show="showcancel" class="pull-right">Cancel</span></a>
+							<a href="" ng-hide="editComment" data-toggle="modal" data-target="#delete_comment{{k._id}}"><span class="pull-right color-blue" ng-if="k.userId==userId">Delete &nbsp;</span></a></p>
+							<p ng-hide="editComment" style="font-family:Arial, Helvetica, sans-serif">{{k.comment}}</p>
+							<p ng-show="editComment"><textarea rows="2" ng-model="k.comment" class="form-control"></textarea>
+							<button style="margin-top:5px" class="comment-btn-sm" id="button" type="submit" ng-click="updateComment(k._id,k.comment)">Comment</button></p>
+							<p><a  ng-hide="upvotedComment[$index]" style="color: #2b6dad;" href="" ng-click="upvoteComment(k._id,$index)">Upvote</a>
+							 <a href=""  ng-show="upvotedComment[$index]" style="color: #777;" ng-click="upvoteComment(k._id,$index)" >Upvoted</a></p>							
+							<hr style="border-top: 1px solid rgba(153, 153, 153, 0.79);">
+						</div>
+												<!--Pop up delete-->
+                          <!-- Modal -->
+                          <div class="modal fade" id="delete_comment{{k._id}}" role="dialog">
+                            <div class="modal-dialog">
+                            
+                              <!-- Modal content-->
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                  <h4 class="modal-title">Delete</h4>
+                                </div>
+                                <div class="modal-body">
+                                  <p>Are you sure you want to delete this Comment?</p>
+                                </div>
+                                <div class="modal-footer">
+                                   <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                                  <button ng-click="deleteComment(k._id)" type="button" class="btn btn-default" data-dismiss="modal">Yes</button>
+                                </div>
+                              </div>
+                              
+                            </div>
+                          </div>
+                        <!--Pop up ends-->
+					</div>
+				</div>
+	    </div>
+	     <!-- Featured Articles (Trending) -->
+      <div class="col-sm-4">
+      	 <div class="col-sm-12 featured_article_style"><h2>Featured Articles </h2>
+      	 </div>
+      	 <div class="col-sm-12 mar_bottom line_bottom" ng-repeat="featured in getFeaturedBlogs">
+	    	    <a href="#article/{{featured._id}}">
+							<div class="img-wrapper" ng-if="featured.imageUrl!=''">
+		    	        <img ng-src="{{featured.imageUrl}}" class="img-responsive">
+							</div>
+							<div class="img-wrapper" ng-if="featured.imageUrl==''">
+								<img src="http://english.tw/wp-content/themes/qaengine/img/default-thumbnail.jpg" class="img-responsive">
+							</div>
+	    	     <h4><b><p><a href="">{{featured.title}}</a></p></b></h4>	
+	    	  	  <p>By <span class="img_title">{{featured.author}}</span> | {{featured.created_at | date}} </p>
+	    	    </a>
+	      </div>
+      </div>
+  </div>
+
+<div ng-include="'pages/footer.html'"></div>

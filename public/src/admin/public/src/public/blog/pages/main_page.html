@@ -1,0 +1,94 @@
+<div ng-include="'pages/header.html'"></div>
+<div class="col-sm-12">
+	 <div class="clearfix"></div>
+	 <hr width="80%" align="center">
+    <div class="col-sm-12 profile_content">
+       <div ng-show="FlashLoginSuccess" class="col-sm-4 alert alert-success fade in flash_div_pos ">
+					<a href=""  class="close" data-dismiss="alert" aria-label="close">&times;</a>
+					<strong>Success!</strong> You are now logged in!!
+      </div>
+       <div class="col-sm-6 col-sm-offset-4 font_style">
+          COOL BLOG
+       </div>
+       <div class="col-sm-4 col-sm-offset-4 mar_bottom10">
+        <input type="text" class="form-control" ng-model="searchTerm" ng-change="searchBlog(searchTerm)" ng-model-options='{ debounce: 700 }' class="search-option" placeholder="Search by Title or Content" >
+       </div>
+    </div>
+    <div class="clearfix"></div>
+    <hr width="80%" align="center">
+
+    <div class="container">
+
+      <div class="col-sm-8 border_right ">
+					<div class="no-post" ng-show="no_data_div" >No post to show</div>
+            <div ng-repeat="blogs in getBlogs track by $index">
+            	<div class="clearfix" ng-if="$index % 2 == 0"></div>
+	            
+			    	<div class="col-sm-6 mar_bottom hover_div">
+			    	<a href="#article/{{blogs._id}}">
+		    	      <div class="img-wrapper" ng-if="blogs.imageUrl!=''">
+		    	        <img ng-src="{{blogs.imageUrl}}" class="img-responsive">
+		    	      </div>
+		    	      <div class="img-wrapper" ng-if="blogs.imageUrl==''">
+		    	        <img src="http://english.tw/wp-content/themes/qaengine/img/default-thumbnail.jpg" class="img-responsive">
+		    	      </div>
+		    	    	<h4><b><p><a href="">{{blogs.title}}</a></p></b></h4>	
+	    	  			 <p>By <span class="img_title text-capitalize">{{blogs.author}}</span> | {{blogs.updated_at | date}} </p> 
+			    	</a>
+		    		</div>
+		    	
+		    </div> 	
+      
+      		<div class="col-sm-12 blog-pages">
+			      <button class="page-btn page-lg-btn" href="" ng-disabled="value" ng-click="pagingPrev(page);activeButton = 0">Previous</button>
+			      <button class="page-btn" href="" ng-class="{active : activeButton == 0}" ng-disabled="disable(0)" ng-click="pagination(0);activeButton=0">{{page*10+1}}</button>
+			      <button class="page-btn" href="" ng-class="{active : activeButton == 1}" ng-disabled="disable(1)" ng-click="pagination(1);activeButton = 1">{{page*10+2}}</button>
+			      <button class="page-btn" href="" ng-class="{active : activeButton == 2}" ng-disabled="disable(2)" ng-click="pagination(2);activeButton = 2">{{page*10+3}}</button>
+			      <button class="page-btn" ng-class="{active : activeButton == 3}"  href="" ng-disabled="disable(3)" ng-click="pagination(3);activeButton = 3">{{page*10+4}}</button>
+			      <button class="page-btn" ng-class="{active : activeButton == 4}" href="" ng-disabled="disable(4)" ng-click="pagination(4);activeButton = 4">{{page*10+5}}</button>
+			      <button class="page-btn" ng-class="{active : activeButton == 5}" href="" ng-disabled="disable(5)" ng-click="pagination(5);activeButton = 5">{{page*10+6}}</button>
+			      <button class="page-btn" ng-class="{active : activeButton == 6}" href="" ng-disabled="disable(6)" ng-click="pagination(6);activeButton = 6">{{page*10+7}}</button>
+			      <button class="page-btn" ng-class="{active : activeButton == 7}" href="" ng-disabled="disable(7)" ng-click="pagination(7);activeButton = 7">{{page*10+8}}</button>
+			      <button class="page-btn" ng-class="{active : activeButton == 8}" href=""  ng-disabled="disable(8)" ng-click="pagination(8);activeButton = 8">{{page*10+9}}</button>
+			      <button class="page-btn" ng-class="{active : activeButton == 9}" href="" ng-disabled="disable(9)" ng-click="pagination(9);activeButton = 9">{{page*10+10}}</button>
+			      <button class="page-btn page-lg-btn" class="btn-pageno"  href="" ng-disabled="disable(9)" ng-click="pagingNext(page);activeButton = 0">Next</button>
+			</div>
+      </div>
+
+      <!-- Featured Articles (Trending) -->
+      <div class="col-sm-4">
+      	 <div class="col-sm-12 featured_article_style"><h2>Featured Articles </h2>
+      	 </div>
+      	 <div class="col-sm-12 mar_bottom line_bottom" ng-repeat="featured in getFeaturedBlogs">
+	    	    <a href="#article/{{featured._id}}">
+							<div class="img-wrapper" ng-if="featured.imageUrl!=''">
+		    	        <img ng-src="{{featured.imageUrl}}" class="img-responsive">
+							</div>
+							<div class="img-wrapper" ng-if="featured.imageUrl==''">
+								<img src="http://english.tw/wp-content/themes/qaengine/img/default-thumbnail.jpg" class="img-responsive">
+							</div>
+	    	     <h4><b><p><a href="">{{featured.title}}</a></p></b></h4>	
+	    	  	  <p>By <span class="img_title">{{featured.author}}</span> | {{featured.updated_at | date}} </p>
+	    	    </a>
+	      </div>
+	      <!--<div class="col-sm-12 mar_bottom line_bottom">
+	    	      <div class="img-wrapper">
+	    	        <img src="imgs/blog/img6.jpg">
+	    	      </div>
+	    	   <h4><b><p><a href="">With a $20 Investment, This Unemployed Veteran Fueled a Million-dollar Business</a></p></b></h4>	
+	    	   <p>By <span class="img_title">Healthcoco team</span> | Aug 3, 2016 </p>	
+	     </div>
+	     <div class="col-sm-12 mar_bottom line_bottom">
+	    	      <div class="img-wrapper">
+	    	        <img src="imgs/blog/img2.jpg">
+	    	      </div>
+	    	   <h4><b><p><a href="">Free Google Chrome Extensions Every Entrepreneur Should Install</a></p></b></h4>	
+	    	   <p>By <span class="img_title">Healthcoco team</span> | Aug 3, 2016 </p>
+	     </div>-->
+      
+      </div>
+
+     
+    </div>
+    <div ng-include="'pages/footer.html'"></div>
+</div>

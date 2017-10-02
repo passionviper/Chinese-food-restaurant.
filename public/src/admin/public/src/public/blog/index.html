@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<html ng-app="blogApp">
+
+<head>
+  <title>Demo Blog (MEAN STACK)</title>
+  <!-- <link rel="stylesheet" href="css/bootstrap.css"/> -->
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="shortcut icon" href="imgs/favicon.png" type="image/x-icon">
+  <link rel="icon" href="imgs/favicon.png" type="image/x-icon">
+
+  <script src="js/angular.js"></script>
+  <script src="js/angular-route.js"></script>
+  <script src="js/app.js"></script>
+   <script src="js/jquery.js"></script>
+  <script src="js/bootstrap.js"></script>
+  <script  src="js/ui-bootstrap.js"></script> 
+  <script src="js/ng-ckeditor.min.js"></script>
+  <script src="js/angular-sanitize.js"></script>
+  <script src="js/ng-autogrow.js"></script>
+  <!--<script src="js/ckeditor.js"></script>-->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-sanitize.js"></script>
+  <script src="https://cdn.ckeditor.com/4.5.8/full-all/ckeditor.js"></script> 
+  <!--<script src="js/angular-ckeditor.min.js"></script>
+  <script src="js/ng-ckeditor.min.js"></script>-->
+
+ 
+  <script  src="js/base_64.js"></script> 
+  
+  <!-- Controller files-->
+
+  <script src="js/controller/loginCtrl.js"></script>
+  <script src="js/controller/main_pageCtrl.js"></script>
+  <script src="js/controller/article_viewCtrl.js"></script>
+  <script src="js/controller/user_profileCtrl.js"></script>
+  <script src="js/apiFactory.js"></script>
+</head>
+
+
+<body ng-controller="loginCtrl"> 
+
+  <div id="main">
+  
+    <div ng-view ></div>
+     
+
+    
+  </div>
+  
+</body>
+
+</html>
