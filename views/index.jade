@@ -1,0 +1,195 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    |     
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    |     
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    |     
+    title HAHA Chinese Restaurant
+    |     
+    link(rel='icon', href='images/restaurant-logo-favicon.png', type='image/png', sizes='16x16')
+    |     
+    link(href='https://fonts.googleapis.com/css?family=Oxygen:400,300,700', rel='stylesheet', type='text/css')
+    |     
+    link(href='https://fonts.googleapis.com/css?family=Lora', rel='stylesheet', type='text/css')
+    |     
+    link(rel='stylesheet', href='css/bootstrap.min.css')
+    |     
+    link(rel='stylesheet', href='css/restaurant.css')
+    |     
+    link(rel='stylesheet', href='css/common.css')
+  |   
+  body(ng-app='restaurant', ng-strict-di='')
+    // Fixed position loading indicator
+    loading.loading-indicator
+    |     
+    header
+      nav#header-nav.navbar.navbar-default
+        .container
+          .navbar-header
+            a.pull-left.visible-md.visible-lg(href='index.html')
+              #logo-img(alt='Logo image')
+            |             
+            .navbar-brand
+              a(href='index.html')
+                h1 HAHA Chinese Restaurant
+              |               
+              p
+                img(src='images/star-k-logo.png', alt='Five Star~~~')
+                |               
+                span Five Star~~~
+            |             
+            button#navbarToggle.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#collapsable-nav', aria-expanded='false')
+              span.sr-only Toggle navigation
+              |               
+              span.icon-bar
+              |               
+              span.icon-bar
+              |               
+              span.icon-bar
+          |           
+          #collapsable-nav.collapse.navbar-collapse
+            ul#nav-list.nav.navbar-nav.navbar-right
+              li#navHomeButton.visible-xs
+                a(href='index.html')
+                  span.glyphicon.glyphicon-home
+                  |  Home
+              |               
+              li#navMenuButton(ui-sref-active='active')
+                a(ui-sref='public.menu')
+                  span.glyphicon.glyphicon-cutlery
+                  br.hidden-xs
+                  |  Menu
+              |               
+              li
+                a(ui-sref='public.about')
+                  span.glyphicon.glyphicon-info-sign
+                  br.hidden-xs
+                  |  About
+              |               
+              li
+                a(ui-sref='public.awards')
+                  span.glyphicon.glyphicon-certificate
+                  br.hidden-xs
+                  |  Awards
+              |               
+              li
+                a(ui-sref='public.blog')
+                  span.glyphicon.glyphicon-tasks
+                  br.hidden-xs
+                  |  Blog
+              |               
+              li#phone.hidden-xs
+                a(href='tel:519-729-6872')
+                  span 519-729-6872
+                div * We Deliver
+            // #nav-list
+          // .collapse .navbar-collapse
+        // .container
+      // #header-nav
+    |     
+    #call-btn.visible-xs
+      a.btn(href='tel:519-729-6872')
+        span.glyphicon.glyphicon-earphone
+        |         519-729-6872
+    |     
+    #xs-deliver.text-center.visible-xs * We Deliver
+    |     
+    ui-view
+      .text-center.initial-loading
+        h2 Loading Site...
+    |     
+    footer.panel-footer
+      .container
+        .row
+          section#hours.col-sm-4
+            span Hours:
+            br
+            |             Sun-Thurs: 11:15am - 10:00pm
+            br
+            |             Fri: 11:15am - 2:30pm
+            br
+            |             Saturday Closed
+            |             
+            hr.visible-xs
+          |           
+          section#address.col-sm-4
+            span Address:
+            br
+            |             University Avenue West
+            br
+            |             Waterloo, N2L 3G
+            |             
+            p
+              | * Delivery area within 3-4 miles, with minimum order of $20 plus $3 charge for all deliveries.
+            |             
+            hr.visible-xs
+          |           
+          section#testimonials.col-sm-4
+            p &quot;Oh my god! The hotpot is soooo awesome!&quot;
+            |             
+            p &quot;Waterloo food star! Love it:)))&quot;
+        |         
+        .text-center
+          | &copy; HAHA reserved |
+          a(ui-sref='admin.auth') Admin
+    // Libs
+    script(src='lib/jquery-2.1.4.min.js')
+    |     
+    script(src='lib/bootstrap.min.js')
+    |     
+    script(src='lib/angular.min.js')
+    |     
+    script(src='lib/angular-ui-router.min.js')
+    |     
+    script(src='lib/ng-file-upload/ng-file-upload-shim.min.js')
+    |     
+    script(src='lib/ng-file-upload/ng-file-upload.min.js')
+    // Main Restaurant Module
+    script(src='src/restaurant.module.js')
+    // Common Module
+    script(src='src/common/common.module.js')
+    |     
+    script(src='src/common/loading/loading.component.js')
+    |     
+    script(src='src/common/loading/loading.interceptor.js')
+    |     
+    script(src='src/common/menu.service.js')
+    // Public Module
+    script(src='src/public/public.module.js')
+    |     
+    script(src='src/public/public.routes.js')
+    |     
+    script(src='src/public/menu/menu.controller.js')
+    |     
+    script(src='src/public/menu-category/menu-category.component.js')
+    |     
+    script(src='src/public/menu-items/menu-items.controller.js')
+    |     
+    script(src='src/public/menu-item/menu-item.component.js')
+    // ADMIN SITE
+    script(src='src/admin/admin.module.js')
+    |     
+    script(src='src/admin/admin.routes.js')
+    |     
+    script(src='src/admin/admin-auth/admin-auth.controller.js')
+    |     
+    script(src='src/admin/services/login.service.js')
+    |     
+    script(src='src/admin/services/current-user.service.js')
+    |     
+    script(src='src/admin/services/authredirector.service.js')
+    |     
+    script(src='src/admin/auth.interceptor.js')
+    |     
+    script(src='src/admin/login/login.controller.js')
+    |     
+    script(src='src/admin/category/category-list.component.js')
+    |     
+    script(src='src/admin/category/category-items.controller.js')
+    |     
+    script(src='src/admin/menu-item/menu-item-edit.controller.js')
+    |     
+    script(src='src/admin/menu-item/menu-item-admin.component.js')
